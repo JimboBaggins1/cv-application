@@ -1,55 +1,6 @@
 import { useState } from "react";
 import "./Component.css";
-
-// const CustomInput = () => {
-//     const [value, setValue] = useState("");
-
-//     function handleChange(e) {
-//         setValue(e.target.value);
-//     };
-
-//     return (
-//         <input
-//             type="text"
-//             value={value}
-//             onChange={handleChange}
-//         />
-//     );
-// }
-
-// export const General = () => {
-//     // states
-//     const [editMode, setEditMode] = useState(0);        // 0 === readOnly, 1 === editMode
-//     const [fName, setFName] = useState("");
-//     const [lName, setLName] = useState("");
-//     const [email, setEmail] = useState("");
-//     const [phone, setPhone] = useState("");
-//     const [address, setAddress] = useState("");
-
-//     function handleChange(e) {
-//         setFName(e.target.value);
-//     };
-
-//     const fieldsList = ['First Name', 'Last Name', 'Email', 'Phone Number', 'Address'];
-//     return (
-//         <>
-//             { fieldsList.map(field => {
-//                 return editMode === 0 ? <label>{field}<div key={field}>{fName}</div></label> : <input type='text' value={fName} onChange={handleChange} />;
-//             })}
-//         </>
-//     )
-// }
-
-const Button = ({ text, handleClick }) => {
-  return (
-    <button
-      onClick={handleClick}
-      className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-    >
-      {text}
-    </button>
-  );
-};
+import { Button } from "./Button";
 
 export const GeneralInformationForm = () => {
   const [editMode, setEditMode] = useState(false);
