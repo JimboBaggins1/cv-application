@@ -2,8 +2,8 @@ import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 // import './App.css'
-import { Collapsible } from './Collapsible.jsx';
-import { GeneralInformationForm } from './Components.jsx';
+import { Collapsible } from './components/Collapsible.jsx';
+import { GeneralInformationForm } from './components/Components.jsx';
 
 function App() {
   return (
