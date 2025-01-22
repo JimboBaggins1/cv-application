@@ -3,13 +3,64 @@ import { useState } from 'react'
 // import viteLogo from '/vite.svg'
 // import './App.css'
 import { Collapsible } from './components/Collapsible.jsx';
-import { GeneralInformationForm } from './components/Components.jsx';
+import { GeneralInformationForm } from './components/GeneralInfo.jsx';
+import { Resume } from './components/Resume.jsx';
 
 function App() {
+
+  const initialPersonal = {
+    id: crypto.randomUUID(),
+    firstName: "Jimbo",
+    lastName: "Baggins",
+    email: "jimbobaggins@theshire.com",
+    phone: "+44 123 456 789",
+    address: "Bag End, Bagshot Row, Hobbiton",
+  };
+
+  const initialEducation = {
+    id: crypto.randomUUID(),
+    educationLevel: "MEng",
+    degreeTitle: "Electrical & Electronic Engineering",
+    years: "2017 - 2021",
+  };
+
+  const [personalData, setPersonalData] = useState(initialPersonal);
+
+  const [educationData, setEducationData] = useState([ initialEducation, ]);
+
+  const updatePersonal = (e) => {
+    const { name, value } = e.target;
+
+    setPersonalData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const updateEducation = (e, id) => {
+    const { name, value } = e.target;
+
+    setEducationData(educationData.map(education => {
+      if (id === education.id) {
+        return { ...education, [name]: value }
+      }
+      return education;
+    }));
+  };
+
+  const addEducation = () => {
+    const newEducation = { ...initialEducation, id: crypto.randomUUID() };
+    setEducationData([
+      ...educationData,
+      newEducation
+    ]);
+  }
+
   return (
     <div className='container flex w-screen'>
       <aside className='left-side overflow-y-auto p-5 bg-slate-50 w-1/3'>
-        <Collapsible title={'General Information'} content={<GeneralInformationForm />}/>
+        <Collapsible title={'General Information'} content={<GeneralInformationForm canAddForms={false} formFields={personalData} handleUpdate={e => updatePersonal(e)} />}/>
+        <Collapsible title={'Education'} content={educationData.map(education => <GeneralInformationForm key={education.id} canAddForms={true} formFields={education} handleAdd={addEducation} handleUpdate={e => updateEducation(e, education.id)} />)} /> 
         <section >
           <header className='text-2xl font-bold text-slate-600 p-3.5'>Education</header>
         </section>
@@ -17,7 +68,9 @@ function App() {
           <header className='text-2xl font-bold text-slate-600 p-3.5'>Experience</header>
         </section>
       </aside>
-      <div className='right-side shadow min-h-screen w-2/3'></div>
+      <div className='right-side shadow min-h-screen w-2/3 py-5 px-24'>
+        <Resume generalInfoFields={personalData} educationFields={educationData}/>
+      </div>
     </div>
   )
 
