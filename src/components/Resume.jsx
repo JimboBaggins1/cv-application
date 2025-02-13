@@ -18,6 +18,8 @@ export const Resume = ({ generalInfoFields, educationFields }) => {
                     return <ul key={education.id}>
                         <li>{education.educationLevel}</li>
                         <li>{education.degreeTitle}</li>
+                        <li>{education.years}</li>
+                        <li>{education.description}</li>
                     </ul>
                 })}
             </section>
