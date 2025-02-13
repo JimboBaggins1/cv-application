@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { Collapsible } from './components/Collapsible.jsx';
 import { GeneralInformationForm } from './components/GeneralInfo.jsx';
 import { Resume } from './components/Resume.jsx';
+import { Button } from './components/Button.jsx';
 
 function App() {
 
@@ -59,10 +60,8 @@ function App() {
   return (
     <div className='container flex w-screen'>
       <aside className='left-side overflow-y-auto p-5 bg-slate-50 w-1/3'>
-        <Collapsible title={'General Information'} content={<GeneralInformationForm canAddForms={false} formFields={personalData} handleUpdate={e => updatePersonal(e)} />}/>
-        <Collapsible title={'Education'} content={educationData.map(education => <GeneralInformationForm key={education.id} canAddForms={true} formFields={education} handleAdd={addEducation} handleUpdate={e => updateEducation(e, education.id)} />)} /> 
-        <section >
-          <header className='text-2xl font-bold text-slate-600 p-3.5'>Education</header>
+        <Collapsible title={'General Information'} content={<GeneralInformationForm formFields={personalData} handleUpdate={e => updatePersonal(e)} />}/>
+        <Collapsible title={'Education'} content={educationData.map(education => <GeneralInformationForm key={education.id} formFields={education} handleUpdate={e => updateEducation(e, education.id)} />)} buttons={<Button text={'Add'} handleClick={addEducation} />} />
         </section>
         <section>
           <header className='text-2xl font-bold text-slate-600 p-3.5'>Experience</header>

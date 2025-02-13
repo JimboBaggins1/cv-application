@@ -1,36 +1,15 @@
 import { useState } from "react";
 import "./Component.css";
-import { Button } from "./Button";
 
-export const GeneralInformationForm = ({
-  canAddForms = false,
-  formFields,
-  handleUpdate,
-  handleAdd,
-}) => {
-  console.log(formFields);
-  const [editMode, setEditMode] = useState(false);
-  // const [generalFormData, setGeneralFormData] = useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   email: "",
-  //   phone: "",
-  //   address: "",
-  // });
+function capitalizeAndSplit(str) {
+  // Capitalize the first letter and split the string at capital letters
+  return str
+    .replace(/([A-Z])/g, ' $1')   // Add a space before capital letters
+    .replace(/^./, (match) => match.toUpperCase()) // Capitalize the first letter
+    .trim();  // Remove leading/trailing whitespace
+};
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-
-  //   setGeneralFormData((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
-
-  const handleButtonClick = (editMode) => {
-    editMode === false ? setEditMode(true) : setEditMode(false);
-  };
-
+export const GeneralInformationForm = ({ formFields, handleUpdate }) => {
   return (
     <>
       <form className="w-full max-w-xl p-0.5">
@@ -44,7 +23,7 @@ export const GeneralInformationForm = ({
                       htmlFor="{prop}"
                       className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
                     >
-                      {prop}:
+                      {capitalizeAndSplit(prop)}:
                     </label>
                   </div>
                   <div className="md:w-2/3">
@@ -61,9 +40,8 @@ export const GeneralInformationForm = ({
                       name={prop}
                       value={formFields[prop]}
                       onChange={handleUpdate}
-                      disabled={!editMode}
                       className={
-                        (editMode ? "bg-slate-50" : "bg-gray-200") +
+                        ("bg-slate-50") +
                         " appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                       }
                     />
@@ -73,13 +51,6 @@ export const GeneralInformationForm = ({
             );
         })}
       </form>
-
-      <Button
-        text={editMode ? "View" : "Edit"}
-        handleClick={() => handleButtonClick(editMode)}
-      />
-
-      {canAddForms && <Button text={"Add"} handleClick={handleAdd} />}
     </>
   );
 };
