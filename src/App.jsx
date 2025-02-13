@@ -98,7 +98,7 @@ function App() {
         <Collapsible title={'Experience'} content={experienceData.map(experience => <GeneralInformationForm key={experience.id} formFields={experience} handleUpdate={e => updateExperience(e, experience.id)} />)} buttons={<Button text={'Add'} handleClick={addExperience} />} />
       </aside>
       <div className='right-side shadow min-h-screen w-2/3 py-5 px-24'>
-        <Resume generalInfoFields={personalData} educationFields={educationData}/>
+        <Resume generalInfoFields={personalData} educationFields={educationData} experienceFields={experienceData}/>
       </div>
     </div>
   )

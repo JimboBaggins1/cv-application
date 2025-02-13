@@ -1,4 +1,4 @@
-export const Resume = ({ generalInfoFields, educationFields }) => {
+export const Resume = ({ generalInfoFields, educationFields, experienceFields }) => {
     console.log(generalInfoFields);
     console.log(educationFields)
     let fullName = generalInfoFields.firstName + ' ' + generalInfoFields.lastName;
@@ -14,12 +14,21 @@ export const Resume = ({ generalInfoFields, educationFields }) => {
             </section>
             <section className="border-b-8 border-slate-400 pb-2">
                 <h2 className="text-5xl font-bold mt-5 mb-3 text-slate-600">Education</h2>
-                {educationFields.map(education => {
+                {(educationFields.length !== 0) && educationFields.map(education => {
                     return <ul key={education.id}>
                         <li>{education.educationLevel}</li>
                         <li>{education.degreeTitle}</li>
                         <li>{education.years}</li>
                         <li>{education.description}</li>
+                    </ul>
+                })}
+            </section>
+            <section className="border-b-8 border-slate-400 pb-2">
+                <h2 className="text-5xl font-bold mt-5 mb-3 text-slate-600">Experience</h2>
+                {(experienceFields.length !== 0) && experienceFields.map(experience => {
+                    return <ul key={experience.id}>
+                        <li>{experience.title}</li>
+                        <li>{experience.description}</li>
                     </ul>
                 })}
             </section>
