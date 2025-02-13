@@ -23,11 +23,20 @@ function App() {
     educationLevel: "MEng",
     degreeTitle: "Electrical & Electronic Engineering",
     years: "2017 - 2021",
+    description: "Brief description of time at uni",
   };
+
+  const initialExperience = {
+    id: crypto.randomUUID(),
+    title: "Burglar",
+    description: "Went on a journey to steal from a dragon with a company of thirteen homeless dwarves",
+  }
 
   const [personalData, setPersonalData] = useState(initialPersonal);
 
   const [educationData, setEducationData] = useState([ initialEducation, ]);
+
+  const [experienceData, setExperienceData] = useState([ initialExperience, ]);
 
   const updatePersonal = (e) => {
     const { name, value } = e.target;
@@ -49,23 +58,44 @@ function App() {
     }));
   };
 
+  const updateExperience = (e, id) => {
+    const { name, value } = e.target;
+
+    setExperienceData(experienceData.map(experience => {
+      if (id === experience.id) {
+        return { ...experience, [name]: value }
+      }
+      return experience;
+    }));
+  };
+
   const addEducation = () => {
-    const newEducation = { ...initialEducation, id: crypto.randomUUID() };
+    // Start with clean slate for new education, rather than copying the inital
+    const blankEducation = { ...initialEducation };
+    Object.keys(blankEducation).forEach(key => blankEducation[key] = null);
+    const newEducation = { ...blankEducation, id: crypto.randomUUID() };
     setEducationData([
       ...educationData,
       newEducation
     ]);
-  }
+  };
+
+  const addExperience = () => {
+    const blankExperience = { ...initialExperience };
+    Object.keys(blankExperience).forEach(key => blankExperience[key] = null);
+    const newExperience = { ...blankExperience, id: crypto.randomUUID() };
+    setExperienceData([
+      ...experienceData,
+      newExperience
+    ]);
+  };
 
   return (
     <div className='container flex w-screen'>
       <aside className='left-side overflow-y-auto p-5 bg-slate-50 w-1/3'>
         <Collapsible title={'General Information'} content={<GeneralInformationForm formFields={personalData} handleUpdate={e => updatePersonal(e)} />}/>
         <Collapsible title={'Education'} content={educationData.map(education => <GeneralInformationForm key={education.id} formFields={education} handleUpdate={e => updateEducation(e, education.id)} />)} buttons={<Button text={'Add'} handleClick={addEducation} />} />
-        </section>
-        <section>
-          <header className='text-2xl font-bold text-slate-600 p-3.5'>Experience</header>
-        </section>
+        <Collapsible title={'Experience'} content={experienceData.map(experience => <GeneralInformationForm key={experience.id} formFields={experience} handleUpdate={e => updateExperience(e, experience.id)} />)} buttons={<Button text={'Add'} handleClick={addExperience} />} />
       </aside>
       <div className='right-side shadow min-h-screen w-2/3 py-5 px-24'>
         <Resume generalInfoFields={personalData} educationFields={educationData}/>
