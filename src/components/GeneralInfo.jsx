@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Component.css";
+import { XCircleIcon } from '@heroicons/react/24/outline';
 
 function capitalizeAndSplit(str) {
   // Capitalize the first letter and split the string at capital letters
@@ -13,6 +14,7 @@ export const GeneralInformationForm = ({ formFields, handleUpdate }) => {
   return (
     <>
       <form className="w-full max-w-xl p-0.5">
+        <XCircleIcon className="size-6 float-right" />
         {Object.keys(formFields).map((prop) => {
           if (prop !== "id")
             return (

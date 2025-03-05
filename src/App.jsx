@@ -94,8 +94,8 @@ function App() {
     <div className='container flex w-screen'>
       <aside className='left-side overflow-y-auto p-5 bg-slate-50 w-1/3'>
         <Collapsible title={'General Information'} content={<GeneralInformationForm formFields={personalData} handleUpdate={e => updatePersonal(e)} />}/>
-        <Collapsible title={'Education'} content={educationData.map(education => <GeneralInformationForm key={education.id} formFields={education} handleUpdate={e => updateEducation(e, education.id)} />)} buttons={<Button text={'Add'} handleClick={addEducation} />} />
-        <Collapsible title={'Experience'} content={experienceData.map(experience => <GeneralInformationForm key={experience.id} formFields={experience} handleUpdate={e => updateExperience(e, experience.id)} />)} buttons={<Button text={'Add'} handleClick={addExperience} />} />
+        <Collapsible title={'Education'} content={educationData.map(education => <GeneralInformationForm key={education.id} formFields={education} handleUpdate={e => updateEducation(e, education.id)} />)} addButton={<Button text={'Add'} handleClick={addEducation} />} />
+        <Collapsible title={'Experience'} content={experienceData.map(experience => <GeneralInformationForm key={experience.id} formFields={experience} handleUpdate={e => updateExperience(e, experience.id)} />)} addButton={<Button text={'Add'} handleClick={addExperience} />} />
       </aside>
       <div className='right-side shadow min-h-screen w-2/3 py-5 px-24'>
         <Resume generalInfoFields={personalData} educationFields={educationData} experienceFields={experienceData}/>
